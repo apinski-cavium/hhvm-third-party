@@ -1,4 +1,5 @@
 set(C_SOURCES)
+
 auto_sources(files "*.c" "RECURSE" "${CMAKE_CURRENT_SOURCE_DIR}/mcrouter")
 foreach (file ${files})
   if (${file} MATCHES "/(test|examples)/")
@@ -20,6 +21,8 @@ foreach (file ${files})
   endif()
 endforeach()
 list(APPEND CXX_SOURCES ${files})
+# McAsciiParser-gen.cpp.cpp is generated from lib/network/McAsciiParser-gen.rl using ragel
+list(APPEND CXX_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/McAsciiParser-gen.cpp")
 
 add_definitions(-DNO_LIB_GFLAGS)
 add_definitions(-DLIBMC_FBTRACE_DISABLE)
